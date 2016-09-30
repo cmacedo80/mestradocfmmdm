@@ -40,7 +40,7 @@ public final class RWrapper {
             c = new RConnection();// make a new local connection on default port (6311)
             c.eval("rm(list=ls())");
             System.out.println("br.cfmm.dm.RWrapper.<init>() 0");
-            c.eval("source(file = 'inicio.r')");
+            c.eval("source(file = 'javainicio.r')");
             System.out.println("br.cfmm.dm.RWrapper.<init>() 1");
             //org.rosuda.REngine.REXP x0 = c.eval("diretorio");
             //System.out.println("br.cfmm.dm.RWrapper.<init>() 2");
@@ -69,7 +69,7 @@ public final class RWrapper {
             
             //c.eval("source(file = 'predict.r')");
             System.out.println("br.cfmm.dm.RWrapper.getPredicao() 1");
-            c.eval("source(file = 'predict.r')");
+            c.eval("source(file = 'javapredict.r')");
             System.out.println("br.cfmm.dm.RWrapper.getPredicao() 2");
             org.rosuda.REngine.RFactor x0 = c.eval("xpred").asFactor();
             System.out.println("br.cfmm.dm.RWrapper.getPredicao() 3 size " + x0.size());
