@@ -39,19 +39,23 @@ public final class RWrapper {
             System.out.println("br.cfmm.dm.RWrapper.<init>()");
             c = new RConnection();// make a new local connection on default port (6311)
             c.eval("rm(list=ls())");
-            c.eval("source(file = 'javainicio.r')");
-            //org.rosuda.REngine.REXP x0 = c.eval("diretorio");
+            if ( Frontend.workfolder != null)
+            {
+                 c.eval("setwd('" + Frontend.workfolder + "')");
+            }
+            org.rosuda.REngine.REXP x0 = c.eval("getwd()");
             //System.out.println("br.cfmm.dm.RWrapper.<init>() 2");
-            //System.out.println(x0.asString());
+            System.out.println(x0.asString());
+            c.eval("source(file = 'javainicio.r')");
             // c.eval("source(file = 'predict.r')");
         } catch (RserveException ex) {
             System.err.println(ex);
             Logger.getLogger(RWrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        catch (REXPMismatchException ex) {
-//            System.err.println(ex);
-//            Logger.getLogger(RWrapper.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        catch (REXPMismatchException ex) {
+            System.err.println(ex);
+            Logger.getLogger(RWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
 //        catch (REXPMismatchException ex) {
 //            System.err.println(ex);
 //            Logger.getLogger(RWrapper.class.getName()).log(Level.SEVERE, null, ex);

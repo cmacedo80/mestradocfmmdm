@@ -16,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
  * @author m358869
  */
 public class Frontend extends javax.swing.JFrame {
+
+    public static String workfolder;
     
     /**
      * Creates new form frontend
@@ -168,6 +170,10 @@ public class Frontend extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+        if ( args.length > 0 ) {
+            System.out.println("folder + " + args[0]);
+            workfolder = args[0];
+        }
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
