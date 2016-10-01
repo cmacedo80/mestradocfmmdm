@@ -37,9 +37,9 @@ Sys.setlocale("LC_ALL", locale="pt_PT.UTF-8")
 ag <- read.csv(file="ag.csv", header=TRUE, sep=";",encoding = 'UTF-8',nrows = 10000,stringsAsFactors = F)
 pj <- read.csv(file="pj.csv", header=TRUE, sep=";",encoding = 'UTF-8',nrows = 10000,stringsAsFactors = F)
 
-set.seed(1234)
+set.seed(123)
 indices_ag <- sample( 1:4000, 4000)
-set.seed(1234)
+set.seed(123)
 indices_pj <- sample( 4001:8000, 4000)
 
 ag.tr <- indices_ag[1:2400]     # %60
