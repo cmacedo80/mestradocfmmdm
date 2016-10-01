@@ -20,12 +20,12 @@ library(Rserve)
 library(randomForest)
 
 #########################################################
-# Configuração
+# Configura??o
 #########################################################
 #cores
 pal2 <- brewer.pal(8,"Dark2")
 
-# comando para permitir a comunicaÃ§Ã£o com o aplicativo java
+# comando para permitir a comunica????o com o aplicativo java
 # Rserve(args = '--no-save')
 
 
@@ -52,7 +52,7 @@ pj.te <- indices_pj[3201:4000]  # %20
 
 
 #########################################################
-# Geração da WordCloud
+# Gera??o da WordCloud
 #########################################################
 
 #  ag_corpus = Corpus(VectorSource(ag$titulo))
@@ -76,7 +76,7 @@ pj.te <- indices_pj[3201:4000]  # %20
 # wordcloud(pj_corpus,max.words = 100, min.freq = 2,random.order = FALSE,colors=pal2)
 
 #########################################################
-# Preparação das bases de treinamento, validacao e teste
+# Prepara??o das bases de treinamento, validacao e teste
 #########################################################
 atividades  = rbind(ag,pj)
 
@@ -117,37 +117,37 @@ atividades.test<-rbind(atividades[ag.te,],atividades[pj.te,])
 
 #atividades[ag_indices,]
 #
-# Treinamento e predição com a arvore de decisao
+# Treinamento e predi??o com a arvore de decisao
 atividades.tree = rpart(descricao~.,  method = "class", data = atividades.train);  
 pred.tree = predict(atividades.tree, atividades.validation,  type="class")
 table(atividades.validation$descricao,pred.tree,dnn=c("Real","Previsto"))
 caret::confusionMatrix(table(atividades.validation$descricao,pred.tree,dnn=c("Real","Previsto")))
 
-# Treinamento e predição com naives bayes
+# Treinamento e predi??o com naives bayes
 atividades.naiveBayes <- naiveBayes(descricao ~ ., data = atividades.train)
 pred.naiveBayes <- predict(atividades.naiveBayes,atividades.validation)
 #table(atividades.validation$descricao,pred=pred.naiveBayes,dnn=c("Real","Previsto"))
 caret::confusionMatrix(table(atividades.validation$descricao,pred=pred.naiveBayes,dnn=c("Real","Previsto")))
 #table(atividades.validation$descricao,pred.naiveBayes,dnn=c("Obs","Pred"))
 
-# Treinamento e predição com random folrest
+# Treinamento e predi??o com random folrest
 atividades.randomForest <- randomForest(descricao ~ .,  data=atividades.train, importance=TRUE,   ntree=2000)
 pred.randomForest <- predict(atividades.randomForest, atividades.validation)
 #table(atividades.validation$descricao,pred=pred.randomForest,dnn=c("Real","Previsto"))
 caret::confusionMatrix(table(atividades.validation$descricao,pred=pred.randomForest,dnn=c("Real","Previsto")))
 
-# Treinamento e predição com SVM
+# Treinamento e predi??o com SVM
 atividades.svm = svm(descricao~., data = atividades.train);
 pred.svm = predict(atividades.svm, atividades.validation)
 #table(atividades.validation$descricao,pred.svm,dnn=c("Real","Previsto"))
 caret::confusionMatrix(table(atividades.validation$descricao,pred.svm,dnn=c("Real","Previsto")))
 
-# Predição final com a base de teste com o random forest
+# Predi??o final com a base de teste com o random forest
 pred.randomForest <- predict(atividades.randomForest, atividades.test)
 caret::confusionMatrix(table(atividades.validation$descricao,pred=pred.randomForest,dnn=c("Real","Previsto")))
 
 #save(preditor,atividades_dtm_tfidf,file="modelo.RData")
-save.image("modelo.RDAta")
+#save.image("modelo.RDAta")
 preditor <- atividades.svm;
 save(preditor, atividades_dtm_tfidf, file="var.RData")
 #save.image(file="cfmm.RData")
