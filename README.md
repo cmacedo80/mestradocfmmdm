@@ -19,5 +19,6 @@ rcmd BATCH treinamento.r
 
 ##Como executar o aplicativo?
 
-$ java -cp frontend-1.jar br.cfmm.dm.Frontend
+$ java -jar "/Users/.../appdm.jar" path_to_r_scripts
+
 

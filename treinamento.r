@@ -94,6 +94,8 @@ atividades_corpus = tm_map(atividades_corpus, PlainTextDocument)
 
 #atividades_dtm_tfidf <- DocumentTermMatrix(atividades_corpus, control = list(weighting = weightTfIdf))
 atividades_dtm_tfidf <- DocumentTermMatrix(atividades_corpus)
+atividades_dtm_tfidf
+
 atividades_dtm_tfidf = removeSparseTerms(atividades_dtm_tfidf, 0.99)
 #findFreqTerms(atividades_dtm_tfidf, 1)
 
