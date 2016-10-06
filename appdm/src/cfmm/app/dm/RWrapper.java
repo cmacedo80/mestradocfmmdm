@@ -44,17 +44,22 @@ public final class RWrapper {
         
         
         try {
-            
+            System.err.println(">0");
             c = new RConnection();// make a new local connection on default port (6311)
+            System.err.println(">0.5");
             c.eval("rm(list=ls())");
+            System.err.println(">1");
             if ( Frontend.workfolder != null)
             {
                  c.eval("setwd('" + Frontend.workfolder + "')");
             }
             org.rosuda.REngine.REXP x0 = c.eval("getwd()");
+            System.err.println(">2");
             //System.out.println("br.cfmm.dm.RWrapper.<init>() 2");
-            System.out.println(x0.asString());
+            System.out.println("Diretorio: " + x0.asString());
+            System.err.println(">3");
             c.eval("source(file = 'javainicio.r')");
+            System.err.println(">4");
             // c.eval("source(file = 'predict.r')");
         } catch (RserveException ex) {
             showMessageDialog(null, ex);
@@ -77,22 +82,29 @@ public final class RWrapper {
         System.out.println("br.cfmm.dm.RWrapper.getPredicao");
         
         List<Model> lista = new ArrayList<Model>();
-        
+        System.err.println(">>a");
         if ( c == null )
         {
             init();
         }
+        System.err.println(">>b");
         if (c == null) {
             showMessageDialog(null, "Problemas na comunicação com o R");
         } else {
             String[] linhas = texto.split("\n");
             try {
                 RList l = new RList();
+                System.err.println(">>c");
                 c.eval("rm(xpred)");
+                System.err.println(">>d");
                 c.assign("titulo", new REXPString(linhas));
+                System.err.println(">>d");
                 //c.eval("source(file = 'predict.r')");
+                System.err.println(">>e");
                 c.eval("source(file = 'javapredict.r')");
+                System.err.println(">>f");
                 org.rosuda.REngine.RFactor x0 = c.eval("xpred").asFactor();
+                System.err.println(">>g");
                 for (int i = 0; i < x0.size(); i++) {
                     lista.add(new Model(linhas[i], x0.at(i)));
                 }
@@ -110,6 +122,7 @@ public final class RWrapper {
                 Logger.getLogger(RWrapper.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        System.err.println(">>z");
 
         return lista;
     }
