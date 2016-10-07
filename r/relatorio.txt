@@ -15,6 +15,8 @@ Digite 'demo()' para demonstrações, 'help()' para o sistema on-line de ajuda,
 ou 'help.start()' para abrir o sistema de ajuda em HTML no seu navegador.
 Digite 'q()' para sair do R.
 
+[Área de trabalho anterior carregada]
+
 > #########################################################
 > # script de treinamento dos modelos 
 > # Autor: Cristiano Francis Matos de Macedo
@@ -121,8 +123,8 @@ The following object is masked from 'package:dplyr':
 Warning message:
 In Sys.setlocale("LC_ALL", locale = "pt_PT.UTF-8") :
   SO informa que a requisição para definir o locale como 'pt_PT.UTF-8' não pode ser honrada
-> ag <- read.csv(file="ag.csv", header=TRUE, sep=";",encoding = 'UTF-8',stringsAsFactors = F,nrows = 100)
-> pj <- read.csv(file="pj.csv", header=TRUE, sep=";",encoding = 'UTF-8',stringsAsFactors = F,nrows = 100)
+> ag <- read.csv(file="ag.csv", header=TRUE, sep=";",encoding = 'UTF-8',stringsAsFactors = F,nrows = 10000)
+> pj <- read.csv(file="pj.csv", header=TRUE, sep=";",encoding = 'UTF-8',stringsAsFactors = F,nrows = 10000)
 > 
 > 
 > totalAmostras <- min(nrow(ag),nrow(pj))
@@ -187,10 +189,10 @@ In Sys.setlocale("LC_ALL", locale = "pt_PT.UTF-8") :
 > #atividades_dtm_tfidf <- DocumentTermMatrix(atividades_corpus, control = list(weighting = weightTfIdf))
 > atividades_dtm_tfidf <- DocumentTermMatrix(atividades_corpus)
 > atividades_dtm_tfidf
-<<DocumentTermMatrix (documents: 200, terms: 726)>>
-Non-/sparse entries: 1476/143724
-Sparsity           : 99%
-Maximal term length: 20
+<<DocumentTermMatrix (documents: 8000, terms: 6535)>>
+Non-/sparse entries: 57951/52222049
+Sparsity           : 100%
+Maximal term length: 48
 Weighting          : term frequency (tf)
 > 
 > atividades_dtm_tfidf = removeSparseTerms(atividades_dtm_tfidf, 0.99)
@@ -225,28 +227,28 @@ Confusion Matrix and Statistics
 
                Previsto
 Real            acaogerencial projeto
-  acaogerencial            19       1
-  projeto                  10      10
-                                         
-               Accuracy : 0.725          
-                 95% CI : (0.5611, 0.854)
-    No Information Rate : 0.725          
-    P-Value [Acc > NIR] : 0.58030        
-                                         
-                  Kappa : 0.45           
- Mcnemar's Test P-Value : 0.01586        
-                                         
-            Sensitivity : 0.6552         
-            Specificity : 0.9091         
-         Pos Pred Value : 0.9500         
-         Neg Pred Value : 0.5000         
-             Prevalence : 0.7250         
-         Detection Rate : 0.4750         
-   Detection Prevalence : 0.5000         
-      Balanced Accuracy : 0.7821         
-                                         
-       'Positive' Class : acaogerencial  
-                                         
+  acaogerencial           506     294
+  projeto                  67     733
+                                          
+               Accuracy : 0.7744          
+                 95% CI : (0.7531, 0.7947)
+    No Information Rate : 0.6419          
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.5488          
+ Mcnemar's Test P-Value : < 2.2e-16       
+                                          
+            Sensitivity : 0.8831          
+            Specificity : 0.7137          
+         Pos Pred Value : 0.6325          
+         Neg Pred Value : 0.9163          
+             Prevalence : 0.3581          
+         Detection Rate : 0.3162          
+   Detection Prevalence : 0.5000          
+      Balanced Accuracy : 0.7984          
+                                          
+       'Positive' Class : acaogerencial   
+                                          
 > 
 > # Treinamento e predi??o com naives bayes
 > atividades.naiveBayes <- naiveBayes(descricao ~ ., data = atividades.train)
@@ -257,28 +259,28 @@ Confusion Matrix and Statistics
 
                Previsto
 Real            acaogerencial projeto
-  acaogerencial            20       0
-  projeto                  20       0
-                                        
-               Accuracy : 0.5           
-                 95% CI : (0.338, 0.662)
-    No Information Rate : 1             
-    P-Value [Acc > NIR] : 1             
-                                        
-                  Kappa : 0             
- Mcnemar's Test P-Value : 2.152e-05     
-                                        
-            Sensitivity : 0.5           
-            Specificity :  NA           
-         Pos Pred Value :  NA           
-         Neg Pred Value :  NA           
-             Prevalence : 1.0           
-         Detection Rate : 0.5           
-   Detection Prevalence : 0.5           
-      Balanced Accuracy :  NA           
-                                        
-       'Positive' Class : acaogerencial 
-                                        
+  acaogerencial           535     265
+  projeto                 113     687
+                                          
+               Accuracy : 0.7638          
+                 95% CI : (0.7422, 0.7844)
+    No Information Rate : 0.595           
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.5275          
+ Mcnemar's Test P-Value : 8.062e-15       
+                                          
+            Sensitivity : 0.8256          
+            Specificity : 0.7216          
+         Pos Pred Value : 0.6688          
+         Neg Pred Value : 0.8588          
+             Prevalence : 0.4050          
+         Detection Rate : 0.3344          
+   Detection Prevalence : 0.5000          
+      Balanced Accuracy : 0.7736          
+                                          
+       'Positive' Class : acaogerencial   
+                                          
 > #table(atividades.validation$descricao,pred.naiveBayes,dnn=c("Obs","Pred"))
 > 
 > # Treinamento e predi??o com random folrest
@@ -290,34 +292,31 @@ Confusion Matrix and Statistics
 
                Previsto
 Real            acaogerencial projeto
-  acaogerencial            19       1
-  projeto                   4      16
-                                         
-               Accuracy : 0.875          
-                 95% CI : (0.732, 0.9581)
-    No Information Rate : 0.575          
-    P-Value [Acc > NIR] : 4.309e-05      
-                                         
-                  Kappa : 0.75           
- Mcnemar's Test P-Value : 0.3711         
-                                         
-            Sensitivity : 0.8261         
-            Specificity : 0.9412         
-         Pos Pred Value : 0.9500         
-         Neg Pred Value : 0.8000         
-             Prevalence : 0.5750         
-         Detection Rate : 0.4750         
-   Detection Prevalence : 0.5000         
-      Balanced Accuracy : 0.8836         
-                                         
-       'Positive' Class : acaogerencial  
-                                         
+  acaogerencial           631     169
+  projeto                  76     724
+                                          
+               Accuracy : 0.8469          
+                 95% CI : (0.8283, 0.8642)
+    No Information Rate : 0.5581          
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.6938          
+ Mcnemar's Test P-Value : 4.161e-09       
+                                          
+            Sensitivity : 0.8925          
+            Specificity : 0.8108          
+         Pos Pred Value : 0.7888          
+         Neg Pred Value : 0.9050          
+             Prevalence : 0.4419          
+         Detection Rate : 0.3944          
+   Detection Prevalence : 0.5000          
+      Balanced Accuracy : 0.8516          
+                                          
+       'Positive' Class : acaogerencial   
+                                          
 > 
 > # Treinamento e predi??o com SVM
 > atividades.svm = svm(descricao~., data = atividades.train);
-Warning message:
-In svm.default(x, y, scale = scale, ..., na.action = na.action) :
-  Variable(s) 'financeira' constant. Cannot scale data.
 > pred.svm = predict(atividades.svm, atividades.validation)
 > #table(atividades.validation$descricao,pred.svm,dnn=c("Real","Previsto"))
 > caret::confusionMatrix(table(atividades.validation$descricao,pred.svm,dnn=c("Real","Previsto")))
@@ -325,28 +324,28 @@ Confusion Matrix and Statistics
 
                Previsto
 Real            acaogerencial projeto
-  acaogerencial            20       0
-  projeto                  13       7
-                                          
-               Accuracy : 0.675           
-                 95% CI : (0.5087, 0.8143)
-    No Information Rate : 0.825           
-    P-Value [Acc > NIR] : 0.9939298       
-                                          
-                  Kappa : 0.35            
- Mcnemar's Test P-Value : 0.0008741       
-                                          
-            Sensitivity : 0.6061          
-            Specificity : 1.0000          
-         Pos Pred Value : 1.0000          
-         Neg Pred Value : 0.3500          
-             Prevalence : 0.8250          
-         Detection Rate : 0.5000          
-   Detection Prevalence : 0.5000          
-      Balanced Accuracy : 0.8030          
-                                          
-       'Positive' Class : acaogerencial   
-                                          
+  acaogerencial           632     168
+  projeto                  84     716
+                                        
+               Accuracy : 0.8425        
+                 95% CI : (0.8237, 0.86)
+    No Information Rate : 0.5525        
+    P-Value [Acc > NIR] : < 2.2e-16     
+                                        
+                  Kappa : 0.685         
+ Mcnemar's Test P-Value : 1.709e-07     
+                                        
+            Sensitivity : 0.8827        
+            Specificity : 0.8100        
+         Pos Pred Value : 0.7900        
+         Neg Pred Value : 0.8950        
+             Prevalence : 0.4475        
+         Detection Rate : 0.3950        
+   Detection Prevalence : 0.5000        
+      Balanced Accuracy : 0.8463        
+                                        
+       'Positive' Class : acaogerencial 
+                                        
 > 
 > # Predi??o final com a base de teste com o random forest
 > pred.randomForest <- predict(atividades.randomForest, atividades.test)
@@ -355,25 +354,25 @@ Confusion Matrix and Statistics
 
                Previsto
 Real            acaogerencial projeto
-  acaogerencial            17       3
-  projeto                   3      17
+  acaogerencial           612     188
+  projeto                  96     704
                                           
-               Accuracy : 0.85            
-                 95% CI : (0.7016, 0.9429)
-    No Information Rate : 0.5             
-    P-Value [Acc > NIR] : 4.182e-06       
+               Accuracy : 0.8225          
+                 95% CI : (0.8029, 0.8409)
+    No Information Rate : 0.5575          
+    P-Value [Acc > NIR] : < 2.2e-16       
                                           
-                  Kappa : 0.7             
- Mcnemar's Test P-Value : 1               
+                  Kappa : 0.645           
+ Mcnemar's Test P-Value : 6.669e-08       
                                           
-            Sensitivity : 0.850           
-            Specificity : 0.850           
-         Pos Pred Value : 0.850           
-         Neg Pred Value : 0.850           
-             Prevalence : 0.500           
-         Detection Rate : 0.425           
-   Detection Prevalence : 0.500           
-      Balanced Accuracy : 0.850           
+            Sensitivity : 0.8644          
+            Specificity : 0.7892          
+         Pos Pred Value : 0.7650          
+         Neg Pred Value : 0.8800          
+             Prevalence : 0.4425          
+         Detection Rate : 0.3825          
+   Detection Prevalence : 0.5000          
+      Balanced Accuracy : 0.8268          
                                           
        'Positive' Class : acaogerencial   
                                           
@@ -381,11 +380,11 @@ Real            acaogerencial projeto
 > #save(preditor,atividades_dtm_tfidf,file="modelo.RData")
 > #save.image("modelo.RDAta")
 > preditor <- atividades.randomForest;
-> save(preditor, atividades_dtm_tfidf, file="var.RData", ascii = TRUE)
+> save(preditor, atividades_dtm_tfidf, file="var.RData")
 > #save.image(file="cfmm.RData")
 > 
 > 
 > 
 > proc.time()
   usuário   sistema decorrido 
-     9.82      0.39     10.81 
+   787.98      1.93    794.75 

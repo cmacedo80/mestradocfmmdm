@@ -169,7 +169,7 @@ caret::confusionMatrix(table(atividades.validation$descricao,pred=pred.randomFor
 #save(preditor,atividades_dtm_tfidf,file="modelo.RData")
 #save.image("modelo.RDAta")
 preditor <- atividades.randomForest;
-save(preditor, atividades_dtm_tfidf, file="var.RData", ascii = TRUE)
+save(preditor, atividades_dtm_tfidf, file="var.RData")
 #save.image(file="cfmm.RData")
 
 
