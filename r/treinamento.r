@@ -47,8 +47,8 @@ pal2 <- brewer.pal(8,"Dark2")
 #########################################################
 
 Sys.setlocale("LC_ALL", locale="pt_PT.UTF-8")
-ag <- read.csv(file="ag.csv", header=TRUE, sep=";",encoding = 'UTF-8',stringsAsFactors = F,nrows = 100000)
-pj <- read.csv(file="pj.csv", header=TRUE, sep=";",encoding = 'UTF-8',stringsAsFactors = F,nrows = 100000)
+ag <- read.csv(file="ag.csv", header=TRUE, sep=";",encoding = 'UTF-8',stringsAsFactors = F,nrows = 100)
+pj <- read.csv(file="pj.csv", header=TRUE, sep=";",encoding = 'UTF-8',stringsAsFactors = F,nrows = 100)
 
 
 totalAmostras <- min(nrow(ag),nrow(pj))
@@ -169,7 +169,7 @@ caret::confusionMatrix(table(atividades.validation$descricao,pred=pred.randomFor
 #save(preditor,atividades_dtm_tfidf,file="modelo.RData")
 #save.image("modelo.RDAta")
 preditor <- atividades.randomForest;
-save(preditor, atividades_dtm_tfidf, file="var.RData")
+save(preditor, atividades_dtm_tfidf, file="var.RData", ascii = TRUE)
 #save.image(file="cfmm.RData")
 
 
