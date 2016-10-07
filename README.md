@@ -1,3 +1,10 @@
+# Montando o ambiente
+
+1 Baixar o R 
+2 Baixar RStudio
+$ git clone https://github.com/cmacedo80/mestradocfmmdm.git
+
+
 # Aplicativo de mineração de texto
 
 ##Como realizar o treinamento?

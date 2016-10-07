@@ -1,1 +1,3 @@
-rcmd BATCH r\treinamento.r
+cd r
+rcmd BATCH treinamento.r relatorio.txt
+cd ..

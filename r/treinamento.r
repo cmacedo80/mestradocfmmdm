@@ -3,7 +3,20 @@
 # Autor: Cristiano Francis Matos de Macedo
 #########################################################
 
-# install.packages('randomForest')
+#install.packages('Rserve')
+#install.packages('tm')
+#install.packages('neuralnet')
+#install.packages('e1071')
+#install.packages('dplyr')
+#install.packages('party')
+#install.packages('caret')
+#install.packages('rpart')
+#install.packages('rpart.plot')
+#install.packages('e1071')
+#install.packages('nnet')
+#install.packages('wordcloud')
+#install.packages('randomForest')
+#install.packages('SnowballC')
 
 library(neuralnet)
 library(e1071) 
