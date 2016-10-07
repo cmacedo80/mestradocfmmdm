@@ -47,8 +47,8 @@ pal2 <- brewer.pal(8,"Dark2")
 #########################################################
 
 Sys.setlocale("LC_ALL", locale="pt_PT.UTF-8")
-ag <- read.csv(file="ag.csv", header=TRUE, sep=";",encoding = 'UTF-8',stringsAsFactors = F,nrows = 100)
-pj <- read.csv(file="pj.csv", header=TRUE, sep=";",encoding = 'UTF-8',stringsAsFactors = F,nrows = 100)
+ag <- read.csv(file="ag.csv", header=TRUE, sep=";",encoding = 'UTF-8',stringsAsFactors = F,nrows = 10000)
+pj <- read.csv(file="pj.csv", header=TRUE, sep=";",encoding = 'UTF-8',stringsAsFactors = F,nrows = 10000)
 
 
 totalAmostras <- min(nrow(ag),nrow(pj))
