@@ -3,13 +3,32 @@
 1 Baixar o R 
 
 2 Baixar RStudio
-
+```
 $ git clone https://github.com/cmacedo80/mestradocfmmdm.git
-
+```
 3 Colocar o R no path do windows
+`` 
+C:\Program Files\R\R-3.3
+`` 
 
+4 Fazer o download dos packages, 
 
-
+```
+  #install.packages('Rserve')
+  #install.packages('tm')
+  #install.packages('neuralnet')
+  #install.packages('e1071')
+  #install.packages('dplyr')
+  #install.packages('party')
+  #install.packages('caret')
+  #install.packages('rpart')
+  #install.packages('rpart.plot')
+  #install.packages('e1071')
+  #install.packages('nnet')
+  #install.packages('wordcloud')
+  #install.packages('randomForest')
+  #install.packages('SnowballC')
+```
 
 # Aplicativo de mineração de texto
 
