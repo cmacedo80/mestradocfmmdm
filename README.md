@@ -3,6 +3,14 @@
 1 Baixar o R 
 2 Baixar RStudio
 $ git clone https://github.com/cmacedo80/mestradocfmmdm.git
+3 Colocar o R no path do windows
+
+
+
+
+
+
+
 
 
 # Aplicativo de mineração de texto
