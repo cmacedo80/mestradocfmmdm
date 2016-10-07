@@ -1,4 +1,4 @@
-rem rcmd BATCH r\javabeforeapp.r
+rcmd BATCH r\javabeforeapp.r
 set diretorio=%cd%
 set diretorio=%diretorio:\=/%
 echo %diretorio%
